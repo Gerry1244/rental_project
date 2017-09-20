@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Welcome to your New Home!</title>
+</head>
+<body>
+
+{{#noUser}}
+<a href="/login">login</a>
+<a href="/users/new">signup</a>
+{{/noUser}}
+{{#currentUser}}
+Welcome, {{ currentUser.firstName }} ({{ currentUser.email }})
+
+<br>
+<a href="/logout">Logout</a>
+{{/currentUser}}
+
+	<h1>Apartments</h1>
+	{{#apartments}}
+	<div>
+	<a href="/apartments/{{ id }}">{{ address }}</a>
+	</div>
+	{{/apartments}}
+
+</body>
+</html>

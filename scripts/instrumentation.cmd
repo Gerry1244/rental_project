@@ -1,0 +1,1 @@
+./mvnw process-classes

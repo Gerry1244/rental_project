@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Welcome to your New Home!</title>
+</head>
+<body>
+
+{{#noUser}}
+<a href="/login">login</a>
+{{/noUser}}
+{{#currentUser}}
+Welcome, {{ currentUser.firstName }} (){{ currentUser.email }}
+{{/currentUser}}
+
+	<h1>Apartments</h1>
+	{{#apartments}}
+	<div>
+	<a href="/apartments/{{ id }}">{{ address }}</a>
+	</div>
+	{{/apartments}}
+	
+	<h1>Apartment</h1>
+
+    <ul>
+
+      #foreach( $Apartments in $apartment )
+        <li>${Apartment.id</li>
+      #end
+
+
+</body>
+</html>
+
+
+	
