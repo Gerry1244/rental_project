@@ -11,12 +11,16 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
+import com.libertymutualspark.app.filters.Securityfilters;
 import com.libertymutualspark.app.models.Apartment;
 import com.libertymutualspark.app.models.User;
 import com.libertymutualspark.app.utilities.ApartmentApiController;
 import com.libertymutualspark.app.utilities.AutoCloseableDb;
 import com.libertymutualspark.app.utilities.MustacheRenderer;
 import com.libertymutualspark.app.utilities.UserController;
+
+import spark.Request;
+import spark.Response;
 
 public class Application {
 
@@ -32,9 +36,23 @@ public class Application {
 			new Apartment(6200, 2, 0d, 350, "123 Main St", "San Francisco", "CA", "95125").saveIt();
 			new Apartment(1200, 4, 6d, 4000, "789 Hillcrest Drive", "Manchester", "NH", "03104").saveIt();
 			new Apartment(1459, 3, 6d, 4000, "456 Cowboy Way", "Houston", "TX", "77006").saveIt();
-
+			
+			
+			path("/apartments",() -> {
+				
+			before("/new", Securityfilters.isAuthenticated);
+				
+				
+			get("/new", ApartmentController.newform);
+			get("/:id", ApartmentController.details);
+			
+			before("", Securityfilters.isAuthenticated);
+			post("",     ApartmentController.create);
+		});
+			
+			
+			
 			get("/", HomeController.index);
-			get("/apartments/:id", ApartmentController.details);
 			get("/login", SessionController.newForm);
 			post("/login", SessionController.create);
 			get("/users/new", UserController.newForm);
@@ -48,7 +66,6 @@ public class Application {
 				
 			});
 				
-			
 		}
 
 	}

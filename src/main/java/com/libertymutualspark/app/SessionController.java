@@ -1,5 +1,8 @@
 package com.libertymutualspark.app;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.javalite.activejdbc.Base;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -14,7 +17,9 @@ import spark.Route;
 public class SessionController {
 
 	public static final Route newForm = (Request req, Response res) -> {
-		return MustacheRenderer.getInstance().render("session/newForm.html", null);
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("returnPath", req.queryParams("returnPath"));
+		return MustacheRenderer.getInstance().render("session/newForm.html", model);
 	
 	};
 	
@@ -34,7 +39,7 @@ public class SessionController {
 				req.session().attribute("currentUser", user);
 			}
 		}
-		res.redirect("/");
+		res.redirect(req. queryParamOrDefault("returnPath", "/"));
 		return "";
 	};
 

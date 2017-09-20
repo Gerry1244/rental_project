@@ -5,7 +5,7 @@
 <title>Welcome to your New Home!</title>
 </head>
 <body>
-
+<a href="/apartments/new">List New Apartment</a>
 {{#noUser}}
 <a href="/login">login</a>
 <a href="/users/new">signup</a>
@@ -14,6 +14,7 @@
 Welcome, {{ currentUser.firstName }} ({{ currentUser.email }})
 
 <br>
+<a href="/apartments/new">Create new apartment</a>
 <a href="/logout">Logout</a>
 {{/currentUser}}
 
