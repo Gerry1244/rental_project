@@ -23,11 +23,11 @@ public class SessionController {
 	
 	};
 	
-	public static final Route destroy = (Request req, Response res) -> {
-		req.session().attribute("currentUser", null);
-		res.redirect("/");
-		return "";
-	};
+//	public static final Route destroy = (Request req, Response res) -> {
+//		req.session().attribute("currentUser", null);
+//		res.redirect("/");
+//		return "";
+//	};
 
 	public static final Route create = (Request req, Response res) -> {
 		String email = req.queryParams("email");

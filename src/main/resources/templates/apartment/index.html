@@ -2,17 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Welcome to your New Home!</title>
+<title>My Listings</title>
 </head>
 <body>
-<a href="/apartments/new">List New Apartment</a>
-{{#noUser}}
-<a href="/login">login</a>
-<a href="/users/new">signup</a>
-{{/noUser}}
+
 {{#currentUser}}
 Welcome, {{ currentUser.firstName }} ({{ currentUser.email }})
-<a href= "/apartments/mine">My Listings</a>
+<a href="/apartments/mine">My Listings</a>
 
 <br>
 <a href="/apartments/new">Create new apartment</a>
@@ -20,11 +16,11 @@ Welcome, {{ currentUser.firstName }} ({{ currentUser.email }})
 {{/currentUser}}
 
 	<h1>Apartments</h1>
-	{{#apartments}}
+	{{#apartment}}
 	<div>
-	<a href="/apartments/{{ id }}">{{ address }}</a>
+	<a href="/apartment/{{ id }}">{{ address }}</a>
 	</div>
-	{{/apartments}}
+	{{/apartment}}
 
 </body>
 </html>
