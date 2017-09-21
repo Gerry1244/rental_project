@@ -23,11 +23,10 @@ Welcome, {{ currentUser.firstName }} (){{ currentUser.email }}
 	<h1>Apartment</h1>
 
     <ul>
-
-      #foreach( $Apartments in $apartment )
-        <li>${Apartment.id</li>
+      #foreach( $apartment in $apartments )
+        <li>${apartment.id}</li>
       #end
-
+	</ul>
 
 </body>
 </html>

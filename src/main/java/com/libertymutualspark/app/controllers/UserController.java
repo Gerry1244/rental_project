@@ -1,10 +1,14 @@
-package com.libertymutualspark.app.utilities;
+package com.libertymutualspark.app.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.libertymutualspark.app.models.User;
+import com.libertymutualspark.app.utilities.AutoCloseableDb;
+import com.libertymutualspark.app.utilities.MustacheRenderer;
 
 import spark.Request;
 import spark.Response;
@@ -13,7 +17,11 @@ import spark.Route;
 public class UserController {
 
 	public static final Route newForm = (Request req, Response res) -> {
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("currentUser", req.session().attribute("currentUser"));
+		model.put("noUser", req.session().attribute("currentUser") == null);
 		return MustacheRenderer.getInstance().render("users/signup.html", null);
+		
 	};
 
 	public static final Route create = (Request req, Response res) -> {
@@ -29,7 +37,7 @@ public class UserController {
 			return "";
 		}
 
-
+	
 	};
 
 }

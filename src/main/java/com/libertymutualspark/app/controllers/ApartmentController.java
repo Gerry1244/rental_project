@@ -1,4 +1,4 @@
-package com.libertymutualspark.app;
+package com.libertymutualspark.app.controllers;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,11 +25,14 @@ public class ApartmentController {
 			model.put("apartment", apartment);
 			return MustacheRenderer.getInstance().render("apartment/details.html", model);
 		}
+		
 	};
 
 	public static final Route newform = (Request req, Response res) -> {
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("currentUser", req.session().attribute("currentUser"));
+		model.put("noUser", req.session().attribute("currentUser") == null);
 		return MustacheRenderer.getInstance().render("apartment/newform.html", null);
-
 	};
 
 	public static final Route create = (Request req, Response res) -> {
@@ -37,12 +40,17 @@ public class ApartmentController {
 			Apartment apartment = new Apartment(Integer.parseInt(req.queryParams("rent")),
 					Integer.parseInt(req.queryParams("number_of_bedrooms")),
 					Double.parseDouble(req.queryParams("number_of_bathrooms")),
-					Integer.parseInt(req.queryParams("square_footage")), req.queryParams("address"),
-					req.queryParams("city"), req.queryParams("state"), req.queryParams("zip_code")
+					Integer.parseInt(req.queryParams("square_footage")), 
+					req.queryParams("address"),
+					req.queryParams("city"), 
+					req.queryParams("state"), 
+					req.queryParams("zip_code"), true
+					
 
 			);
 			apartment.saveIt();
 			User user = req.session().attribute("currentUser");
+			System.out.println(user.toString());
 			user.add(apartment);
 			res.redirect("/");
 			return "";
@@ -54,9 +62,11 @@ public class ApartmentController {
 		long id = (long) currentUser.getId();
 
 		try (AutoCloseableDb db = new AutoCloseableDb()) {
-			List<Apartment> apartments = Apartment.where("user_id = ?" + id);
+			List<Apartment> apartments = Apartment.where("user_id = ? and is_active = ?", id, true);
+			List<Apartment> inactiveApartments = Apartment.where("user_id = ? and is_active = ?", id, false);
 			Map<String, Object> model = new HashMap<String, Object>();
-			model.put("apartments", apartments);
+			model.put("isActive", apartments);
+			model.put("notActive", inactiveApartments);
 			return MustacheRenderer.getInstance().render("apartment/index.html", model);
 		}
 

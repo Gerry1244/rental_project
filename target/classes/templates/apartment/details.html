@@ -5,6 +5,7 @@
 <title>Your Next Home</title>
 </head>
 <body>
+{{> /common/_navigation }}
 
 <h1>Only ${{ apartment.rent }}</h1>
 <p>
@@ -16,8 +17,18 @@
   <dd>{{ apartment.numberOfBedrooms }}</dd>
   <dt>Number of bathrooms</dt>
   <dd>{{ apartment.numberOfBathrooms }}</dd>
-  <dt>Square footage</dt>
+  <dt>Square Footage</dt>
   <dd>{{ apartment.squareFootage }}</dd>
+  <dt>Address</dt>
+  <dd>{{ apartment.address }}</dd>
+  <dt>City</dt>
+  <dd>{{ apartment.city }}</dd>
+  <dt>State</dt>
+  <dd>{{ apartment.state }}</dd>
+  <dt>Zip Code</dt>
+  <dd>{{ apartment.zipCode }}</dd>
+  <dt>Likes</dt>
+  <dd>{{ apartment.likes }}</dd>
 </dl>
 
 </body>

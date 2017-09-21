@@ -1,4 +1,4 @@
-package com.libertymutualspark.app.utilities;
+package com.libertymutualspark.app.controllers;
 
 import static spark.Spark.notFound;
 
@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.libertymutualspark.app.models.Apartment;
 import com.libertymutualspark.app.models.User;
+import com.libertymutualspark.app.utilities.AutoCloseableDb;
+import com.libertymutualspark.app.utilities.JsonHelper;
 
 import spark.Request;
 import spark.Response;

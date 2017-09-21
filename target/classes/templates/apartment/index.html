@@ -1,26 +1,27 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My Listings</title>
+<title>Your Listings</title>
 </head>
 <body>
-
-{{#currentUser}}
-Welcome, {{ currentUser.firstName }} ({{ currentUser.email }})
-<a href="/apartments/mine">My Listings</a>
-
-<br>
-<a href="/apartments/new">Create new apartment</a>
-<a href="/logout">Logout</a>
-{{/currentUser}}
-
-	<h1>Apartments</h1>
-	{{#apartment}}
-	<div>
-	<a href="/apartment/{{ id }}">{{ address }}</a>
-	</div>
-	{{/apartment}}
-
+{{> /common/_navigation }}
+<h1>Your Listings</h1>
+	<h2>Active Listings</h2>
+	
+			{{#isActive}}
+			<div>
+				<a href="/apartments/{{ id }}">{{ address }}</a>
+			</div>
+			{{/isActive}}
+	
+	<h2>Inactive Listings</h2>
+	
+			{{#notActive}}
+			<div>
+				<a href="/apartments/{{ id }}">{{ address }}</a>
+			</div>
+			{{/notActive }}
+	
 </body>
 </html>
