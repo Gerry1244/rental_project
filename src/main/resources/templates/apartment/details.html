@@ -1,34 +1,35 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Your Next Home</title>
+<title>Apartment Details</title>
 </head>
 <body>
 {{> /common/_navigation }}
-
-<h1>Only ${{ apartment.rent }}</h1>
+<h1>Apartment Details</h1>
+<h2>Only ${{ apartment.rent }}</h2>
+{{#owner}}
+{{^apartment.isActive}}
+<form method="post" action="/apartments/{{ apartment.id }}/activations">
+<button>Activate listing</button>
+</form>
+{{/apartment.isActive}}
+{{#apartment.isActive}}
+<form method="post" action="/apartments/{{ apartment.id }}/deactivations">
+<button>Deactivate listing</button>
+</form>
+{{/apartment.isActive}}
+{{/owner}}
 <p>
-  {{ apartment.address }}<br>
-  {{ apartment.city }}, {{ apartment.state }} {{ apartment.zipCode }}
-</p>
+	{{ apartment.address }}<br>
+	{{ apartment.city }}, {{ apartment.state }} {{ apartment.zipCode }}
 <dl>
-  <dt>Number of bedrooms</dt>
-  <dd>{{ apartment.numberOfBedrooms }}</dd>
-  <dt>Number of bathrooms</dt>
-  <dd>{{ apartment.numberOfBathrooms }}</dd>
-  <dt>Square Footage</dt>
-  <dd>{{ apartment.squareFootage }}</dd>
-  <dt>Address</dt>
-  <dd>{{ apartment.address }}</dd>
-  <dt>City</dt>
-  <dd>{{ apartment.city }}</dd>
-  <dt>State</dt>
-  <dd>{{ apartment.state }}</dd>
-  <dt>Zip Code</dt>
-  <dd>{{ apartment.zipCode }}</dd>
-  <dt>Likes</dt>
-  <dd>{{ apartment.likes }}</dd>
+	<dt>Number of Bedrooms</dt>
+	<dd>{{ apartment.numberOfBedrooms }}</dd>
+	<dt>Number of Bathrooms</dt>
+	<dd>{{ apartment.numberOfBathrooms }}</dd>
+	<dt>Square Footage</dt>
+	<dd>{{ apartment.squareFootage }}</dd>
 </dl>
 
 </body>

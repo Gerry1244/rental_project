@@ -7,7 +7,7 @@ public class Apartment extends Model {
 	public Apartment() {}
 
 	public Apartment(int rent, int numberOfBedrooms, double numberOfBathrooms, int squareFootage, String address, String city, String state, String zipCode, boolean isActive) {
-		setRent(rent);
+		setRent(rent);  //Constructor above ^
 		setNumberOfBedrooms(numberOfBedrooms);
 		setNumberOfBathrooms(numberOfBathrooms);
 		setSquareFootage(squareFootage);
@@ -18,12 +18,12 @@ public class Apartment extends Model {
 		setIsActive(isActive);
 	}
 	
-	public int getIsActive() {
-		return getInteger("is_active");
+	public boolean getIsActive() {
+		return getBoolean("is_active"); // getter is a method that reads value of a variable
 	}
 
 	public void setIsActive(boolean isActive) {
-		set("is_active", isActive);
+		set("is_active", isActive);  //setter is a method that updates value of a variable
 	}
 	
 	public int getRent() {

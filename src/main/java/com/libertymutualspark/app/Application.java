@@ -43,7 +43,7 @@ public class Application {
 			apartment.save();
 			curtis.add(apartment);
 			
-			apartment = new Apartment(1200, 4, 6d, 4000, "789 Hillcrest Drive", "Manchester", "NH", "03104", false);
+			apartment = new Apartment(1200, 4, 6d, 4000, "789 Hillcrest Drive", "Manchester", "NH", "03104", true);
 			apartment.save();
 			curtis.add(apartment);
 			
@@ -61,6 +61,8 @@ public class Application {
 				get ("/mine", ApartmentController.index);
 				
 				get("/:id", ApartmentController.details);
+				post("/:id/activations", ApartmentController.activate);
+				post("/:id/deactivations", ApartmentController.deactivate);
 				
 				before("", Securityfilters.isAuthenticated);
 				post("",     ApartmentController.create);
@@ -69,10 +71,10 @@ public class Application {
 			
 			get("/", HomeController.index);
 			get("/login", SessionController.newForm);
-			post("/login", SessionController.create);
-			get("/logout", SessionController.destroy);
 			get("/users/new", UserController.newForm);
+			post("/logout", SessionController.destroy);
 			post("/users", UserController.create);
+			post("/login", SessionController.create);
 			
 			
 			path("/api", () -> {

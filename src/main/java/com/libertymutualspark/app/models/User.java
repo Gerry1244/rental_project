@@ -7,7 +7,7 @@ public class User extends Model {
 	
 	public User() {}
 	
-	public User(String email, String password, String firstName, String lastName) {
+	public User(String email, String password, String firstName, String lastName) { 	 //constructor
 		setEmail(email);
 		setPassword(password);
 		setFirstName(firstName);
@@ -15,10 +15,10 @@ public class User extends Model {
 	}
 
 	public String getEmail() {
-		return getString("email");
+		return getString("email");  // getter is a method that reads value of a variable
 	}
 		public void setEmail(String email) {
-		set("email", email);
+		set("email", email);  //setter is a method that updates value of a variable
 	}
 
 	public String getPassword() {

@@ -20,12 +20,16 @@ public class ApartmentController {
 		int id = Integer.parseInt(idAsString);
 
 		try (AutoCloseableDb db = new AutoCloseableDb()) {
-			Apartment apartment = Apartment.findById(id);
+			Apartment apartment = Apartment.findById(id); 
+			User currentUser = req.session().attribute("currentUser");
 			Map<String, Object> model = new HashMap<String, Object>();
 			model.put("apartment", apartment);
+			if (currentUser != null) {
+				model.put("owner", (currentUser.getId().toString()).equals(apartment.get("user_id").toString()));
+			}
 			return MustacheRenderer.getInstance().render("apartment/details.html", model);
-		}
 		
+		}
 	};
 
 	public static final Route newform = (Request req, Response res) -> {
@@ -71,5 +75,30 @@ public class ApartmentController {
 		}
 
 	};
+
+	public static Route activate = (Request req, Response res) -> {
+		try (AutoCloseableDb db = new AutoCloseableDb()) {
+			int id = Integer.parseInt(req.params("id"));
+			Apartment apartment = Apartment.findById(id);
+			apartment.set("is_active", true);
+			apartment.saveIt();
+			res.redirect("/apartments/" + id);
+			return "";
+		}
+	};
+
+	public static Route deactivate = (Request req, Response res) -> {
+		try (AutoCloseableDb db = new AutoCloseableDb()) {
+			int id = Integer.parseInt(req.params("id"));
+			Apartment apartment = Apartment.findById(id);
+			apartment.set("is_active", false);
+			apartment.saveIt();
+			res.redirect("/apartments/" + id);
+			return "";
+		}
+	};
+	
+	
+	
 
 }

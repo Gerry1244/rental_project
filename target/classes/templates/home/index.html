@@ -1,19 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Welcome to your New Home!</title>
+<title>Welcome to your new home!</title>
 </head>
 <body>
-{{> /common/_navigation }}
-	<h1>Apartments</h1>
+	{{> /common/_navigation }}
+	<h1>Apartments!</h1>
 	{{#apartments}}
-	<div>
-	
-	<a href="/apartments/{{ id }}">{{ address }}</a>
-	
-	</div>
+		<div>
+		{{#isActive}}
+			<a href="/apartments/{{ id }}">{{ address }}</a>
+		{{/isActive}}
+		</div>
 	{{/apartments}}
-
 </body>
 </html>

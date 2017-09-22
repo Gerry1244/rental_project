@@ -1,19 +1,20 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Who are you?</title>
+<title>Login</title>
 </head>
 <body>
-
 {{> /common/_navigation }}
-
+<h1>Login</h1>
 <form method="post" action="/login">
-<input type="email" required name="email" placeholder="Your email">
-<input type="password" name="password" placeholder="Your password">
-<button>login</button>
-
-<input type="hidden"  name="returnPath" value="{{ returnPath }}">
+	<input type="email" required name="email" placeholder="Email">
+	<br>
+	<input type="password" name="password" placeholder="Password">
+	<br>
+	<input type="hidden" name="returnPath" value="{{ returnPath }}">
+	<br>
+	<button>Login</button>
 </form>
 
 </body>
