@@ -8,6 +8,7 @@
 	<description>broken collarbones hurt</description>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>org.mindrot</groupId>
 			<artifactId>jbcrypt</artifactId>

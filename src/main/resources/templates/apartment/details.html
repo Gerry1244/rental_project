@@ -19,7 +19,23 @@
 <button>Deactivate listing</button>
 </form>
 {{/apartment.isActive}}
+<h3>People Who Like This Apartment:</h3>
+{{#list}}
+	<div>{{lastName}}, {{firstName}}</div>
+{{/list}}
 {{/owner}}
+{{#currentUser}}
+{{^owner}}
+{{^list}}
+<form method="post" action="/apartments/{{ apartment.id }}/like">
+<button>Like this apartment</button>
+</form>
+{{/list}}
+{{/owner}}
+{{/currentUser}}
+{{#noUser}}
+<a href="/login?returnPath=/apartments/{{ apartment.id }}">Login to LIKE this apartment</a>
+{{/noUser}}
 <p>
 	{{ apartment.address }}<br>
 	{{ apartment.city }}, {{ apartment.state }} {{ apartment.zipCode }}

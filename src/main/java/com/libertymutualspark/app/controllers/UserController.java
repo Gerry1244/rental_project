@@ -2,7 +2,6 @@ package com.libertymutualspark.app.controllers;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -20,15 +19,16 @@ public class UserController {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("currentUser", req.session().attribute("currentUser"));
 		model.put("noUser", req.session().attribute("currentUser") == null);
-		return MustacheRenderer.getInstance().render("users/signup.html", null);
-		
+		return MustacheRenderer.getInstance().render("users/newForm.html", model);
 	};
-
+	
 	public static final Route create = (Request req, Response res) -> {
 		String encryptedPassword = BCrypt.hashpw(req.queryParams("password"), BCrypt.gensalt());
-		User user = new User(req.queryParams("email"), encryptedPassword, req.queryParams("firstName"),
-				req.queryParams("lastName")
-
+		User user = new User(
+				req.queryParams("email"),
+				encryptedPassword,
+				req.queryParams("first_name"),
+				req.queryParams("last_name")
 		);
 		try (AutoCloseableDb db = new AutoCloseableDb()) {
 			user.saveIt();
@@ -36,8 +36,6 @@ public class UserController {
 			res.redirect("/");
 			return "";
 		}
-
-	
 	};
 
 }

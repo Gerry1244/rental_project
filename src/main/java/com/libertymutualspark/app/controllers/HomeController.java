@@ -21,18 +21,17 @@ import spark.Route;
 
 public class HomeController {
 
-	public static final Route index = (Request req, Response res) -> { //method
+	public static final Route index = (Request req, Response res) -> {
 		try (AutoCloseableDb db = new AutoCloseableDb()) {
-			List<Apartment> apartments = Apartment.findAll();
-			Map<String, Object> model = new HashMap<String, Object>();
-			model.put("apartments", apartments);
-			model.put("currentUser", req.session().attribute("currentUser"));
-			model.put("noUser", req.session().attribute("currentUser") == null);
-		return MustacheRenderer.getInstance().render("home/index.html", model);  //method
-//		return renderWithVelocity(model);
-
+		List<Apartment> apartments = Apartment.findAll();
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("apartments", apartments);
+		model.put("currentUser", req.session().attribute("currentUser"));
+		model.put("noUser", req.session().attribute("currentUser") == null);
+		return MustacheRenderer.getInstance().render("home/index.html", model);
+//		return renderWithVelocity (model);
+	
 		}
-
 	};
 	
 //	private static String renderWithVelocity(Map<String, Object> model) {

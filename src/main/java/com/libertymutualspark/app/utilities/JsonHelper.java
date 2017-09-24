@@ -6,6 +6,7 @@ import java.util.Map;
 import org.codehaus.jackson.map.ObjectMapper;
 
 public class JsonHelper {
+
 	public static Map toMap(String json) {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
@@ -23,4 +24,5 @@ public class JsonHelper {
 			throw new RuntimeException(e);
 		}
 	}
+
 }

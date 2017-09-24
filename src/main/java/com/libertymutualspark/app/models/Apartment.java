@@ -3,11 +3,11 @@ package com.libertymutualspark.app.models;
 import org.javalite.activejdbc.Model;
 
 public class Apartment extends Model {
-
+	
 	public Apartment() {}
-
+	
 	public Apartment(int rent, int numberOfBedrooms, double numberOfBathrooms, int squareFootage, String address, String city, String state, String zipCode, boolean isActive) {
-		setRent(rent);  //Constructor above ^
+		setRent(rent);
 		setNumberOfBedrooms(numberOfBedrooms);
 		setNumberOfBathrooms(numberOfBathrooms);
 		setSquareFootage(squareFootage);
@@ -17,21 +17,13 @@ public class Apartment extends Model {
 		setZipCode(zipCode);
 		setIsActive(isActive);
 	}
+
+	private void setIsActive(boolean isActive) {
+		set("is_active", isActive);		
+	}
 	
 	public boolean getIsActive() {
-		return getBoolean("is_active"); // getter is a method that reads value of a variable
-	}
-
-	public void setIsActive(boolean isActive) {
-		set("is_active", isActive);  //setter is a method that updates value of a variable
-	}
-	
-	public int getRent() {
-		return getInteger("rent");
-	}
-
-	public void setRent(int rent) {
-		set("rent", rent);
+		return getBoolean("is_active");
 	}
 
 	public int getNumberOfBedrooms() {
@@ -83,11 +75,19 @@ public class Apartment extends Model {
 	}
 
 	public String getZipCode() {
-		return getString("zip_code");
+		return getString("zipCode");
 	}
 
 	public void setZipCode(String zipCode) {
 		set("zip_code", zipCode);
+	}
+
+	public int getRent() {
+		return getInteger("rent");
+	}
+
+	public void setRent(int rent) {
+		set("rent", rent);
 	}
 
 }

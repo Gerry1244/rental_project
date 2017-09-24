@@ -10,7 +10,5 @@ C:\Users\N0184182\dev\com.libertymutualspark.app\src\main\java\com\libertymutual
 C:\Users\N0184182\dev\com.libertymutualspark.app\src\main\java\com\libertymutualspark\app\Application.java
 C:\Users\N0184182\dev\com.libertymutualspark.app\src\main\java\com\libertymutualspark\app\controllers\UsersApiController.java
 C:\Users\N0184182\dev\com.libertymutualspark.app\src\main\java\com\libertymutualspark\app\controllers\HomeController.java
-C:\Users\N0184182\dev\com.libertymutualspark.app\src\main\java\com\libertymutualspark\app\filters\package-info.java
 C:\Users\N0184182\dev\com.libertymutualspark.app\src\main\java\com\libertymutualspark\app\utilities\MustacheRenderer.java
-C:\Users\N0184182\dev\com.libertymutualspark.app\src\main\java\com\libertymutualspark\app\filters\Securityfilters.java
-C:\Users\N0184182\dev\com.libertymutualspark.app\src\main\java\com\libertymutualspark\app\controllers\package-info.java
+C:\Users\N0184182\dev\com.libertymutualspark.app\src\main\java\com\libertymutualspark\app\filters\SecurityFilters.java

@@ -2,29 +2,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Listings</title>
+<title>Create New Listing</title>
 </head>
 <body>
 {{> /common/_navigation }}
-                
-    <form method="post" action="/apartments">
-    
-     <input name="rent" type="number" required placeholder="Rent">
-      <br>
-    	<input name="number_of_bedrooms" type="number" required placeholder="Number of bedrooms">
-      <br>
-      <input name="number_of_bathrooms" step="0.5" type="number" required placeholder="Number of bathrooms">
-      <br>
-       <input name="square_footage" type="number" required placeholder="Square Footage">
-      <br>
-     <input name="address" type="text" required placeholder="address">
-      <br>
-      <input name="city" type="text" required placeholder="city">
-      <br>
-         <input name="state" type="text" required placeholder="state">
-      <br>
-         <input name="zip_code" type="number" required placeholder="zip_code">
-      <br>
-        
+<h1>Create New Listing</h1>
+<form method="post" action="/apartments">
+	<input type="number" name="rent" placeholder="Rent" required min=0>
+	<br>
+	<input type="number" name="number_of_bedrooms" placeholder="Number of Bedrooms" required min=0 step="0.5">
+	<br>
+	<input type="number" name="number_of_bathrooms" placeholder="Number of Bathrooms" required min =0>
+	<br>
+	<input type="number" name="square_footage" placeholder="Square Footage" required min=0>
+	<br>
+	<input type="text" name="address" placeholder="Street Address" required>
+	<br>
+	<input type="text" name="city" placeholder="City" required>
+	<br>
+	<input type="text" name="state" placeholder="State" required>
+	<br>
+	<input type="text" name="zip_code" placeholder="Zip Code" required>
+	<br>
+	<br>
+	<button>Add listing</button>
+</form>
+
 </body>
 </html>

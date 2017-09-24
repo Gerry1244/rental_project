@@ -1,13 +1,14 @@
 package com.libertymutualspark.app.models;
 
+import java.util.List;
+
 import org.javalite.activejdbc.Model;
 
 public class User extends Model {
-
 	
 	public User() {}
 	
-	public User(String email, String password, String firstName, String lastName) { 	 //constructor
+	public User(String email, String password, String firstName, String lastName) {
 		setEmail(email);
 		setPassword(password);
 		setFirstName(firstName);
@@ -15,14 +16,15 @@ public class User extends Model {
 	}
 
 	public String getEmail() {
-		return getString("email");  // getter is a method that reads value of a variable
+		return getString("email");
 	}
-		public void setEmail(String email) {
-		set("email", email);  //setter is a method that updates value of a variable
+
+	public void setEmail(String email) {
+		set("email", email);
 	}
 
 	public String getPassword() {
-		return getString ("password");
+		return getString("password");
 	}
 
 	public void setPassword(String password) {
@@ -44,6 +46,5 @@ public class User extends Model {
 	public void setLastName(String lastName) {
 		set("last_name", lastName);
 	}
-	
 
 }
