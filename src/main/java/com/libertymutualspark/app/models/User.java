@@ -14,6 +14,22 @@ public class User extends Model {
 		setFirstName(firstName);
 		setLastName(lastName);
 	}
+	
+	public String getFirstName() {
+		return getString("first_name");
+	}
+
+	public void setFirstName(String firstName) {
+		set("first_name", firstName);
+	}
+	
+	public String getLastName() {
+		return getString("last_name");
+	}
+
+	public void setLastName(String lastName) {
+		set("last_name", lastName);
+	}
 
 	public String getEmail() {
 		return getString("email");
@@ -31,20 +47,6 @@ public class User extends Model {
 		set("password", password);
 	}
 
-	public String getFirstName() {
-		return getString("first_name");
-	}
 
-	public void setFirstName(String firstName) {
-		set("first_name", firstName);
-	}
-
-	public String getLastName() {
-		return getString("last_name");
-	}
-
-	public void setLastName(String lastName) {
-		set("last_name", lastName);
-	}
 
 }

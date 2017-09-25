@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.libertymutualspark.app.models.Apartment;
+import com.libertymutualspark.app.models.ApartmentsUsers;
 import com.libertymutualspark.app.models.User;
 import com.libertymutualspark.app.utilities.AutoCloseableDb;
 import com.libertymutualspark.app.utilities.MustacheRenderer;
@@ -23,13 +24,22 @@ public class ApartmentController {
 			List<User> list = apartment.getAll(User.class);
 			User currentUser = req.session().attribute("currentUser");
 			Map<String, Object> model = new HashMap<String, Object>();
+			boolean liker = false;
+			boolean owner = false;
+			if (currentUser != null && apartment.get("user_id").equals(currentUser.getId()) == false && ApartmentsUsers
+					.where("apartment_id = ? and user_id = ?", apartment.getId(), currentUser.getId()).isEmpty()) {
+				liker = true;
+			}
+
+			if (currentUser != null && apartment.get("user_id").equals(currentUser.getId())) {
+				owner = true;
+			}
 			model.put("apartment", apartment);
 			model.put("currentUser", req.session().attribute("currentUser"));
 			model.put("noUser", req.session().attribute("currentUser") == null);
 			model.put("list", list);
-			if (currentUser != null) {
-				model.put("owner", (currentUser.getId().toString()).equals(apartment.get("user_id").toString()));
-			}
+			model.put("liker", liker);
+			model.put("owner", owner);
 			return MustacheRenderer.getInstance().render("apartment/details.html", model);
 		}
 	};

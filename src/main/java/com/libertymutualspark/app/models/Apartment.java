@@ -17,13 +17,13 @@ public class Apartment extends Model {
 		setZipCode(zipCode);
 		setIsActive(isActive);
 	}
-
-	private void setIsActive(boolean isActive) {
-		set("is_active", isActive);		
-	}
 	
-	public boolean getIsActive() {
-		return getBoolean("is_active");
+	public int getRent() {
+		return getInteger("rent");
+	}
+
+	public void setRent(int rent) {
+		set("rent", rent);
 	}
 
 	public int getNumberOfBedrooms() {
@@ -41,7 +41,7 @@ public class Apartment extends Model {
 	public void setNumberOfBathrooms(double numberOfBathrooms) {
 		set("number_of_bathrooms", numberOfBathrooms);
 	}
-
+	
 	public int getSquareFootage() {
 		return getInteger("square_footage");
 	}
@@ -61,7 +61,8 @@ public class Apartment extends Model {
 	public String getCity() {
 		return getString("city");
 	}
-
+	
+	
 	public void setCity(String city) {
 		set("city", city);
 	}
@@ -82,12 +83,13 @@ public class Apartment extends Model {
 		set("zip_code", zipCode);
 	}
 
-	public int getRent() {
-		return getInteger("rent");
+	
+	private void setIsActive(boolean isActive) {
+		set("is_active", isActive);		
 	}
-
-	public void setRent(int rent) {
-		set("rent", rent);
+	
+	public boolean getIsActive() {
+		return getBoolean("is_active");
 	}
 
 }

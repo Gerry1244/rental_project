@@ -7,34 +7,35 @@
 <body>
 {{> /common/_navigation }}
 <h1>Apartment Details</h1>
-<h2>Only ${{ apartment.rent }}</h2>
+<h2>Rent ${{ apartment.rent }}</h2>
 {{#owner}}
 {{^apartment.isActive}}
 <form method="post" action="/apartments/{{ apartment.id }}/activations">
-<button>Activate listing</button>
+<button>Acivate listing</button>
 </form>
 {{/apartment.isActive}}
 {{#apartment.isActive}}
 <form method="post" action="/apartments/{{ apartment.id }}/deactivations">
-<button>Deactivate listing</button>
+<button>Deacivate listing</button>
 </form>
 {{/apartment.isActive}}
-<h3>People Who Like This Apartment:</h3>
+<h3>Number of People Who Like This Apartment: {{ list.size }}</h3>
+<h4>People Who Like This Apartment:</h4>
 {{#list}}
 	<div>{{lastName}}, {{firstName}}</div>
 {{/list}}
 {{/owner}}
-{{#currentUser}}
-{{^owner}}
-{{^list}}
+{{#liker}}
+{{#apartment}}
 <form method="post" action="/apartments/{{ apartment.id }}/like">
 <button>Like this apartment</button>
 </form>
-{{/list}}
-{{/owner}}
-{{/currentUser}}
+{{/apartment}}
+{{/liker}}
 {{#noUser}}
+	{{#apartment}}
 <a href="/login?returnPath=/apartments/{{ apartment.id }}">Login to LIKE this apartment</a>
+	{{/apartment}}
 {{/noUser}}
 <p>
 	{{ apartment.address }}<br>
