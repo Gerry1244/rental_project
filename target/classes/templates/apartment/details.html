@@ -11,12 +11,12 @@
 {{#owner}}
 {{^apartment.isActive}}
 <form method="post" action="/apartments/{{ apartment.id }}/activations">
-<button>Acivate listing</button>
+<button>Activate listing</button>
 </form>
 {{/apartment.isActive}}
 {{#apartment.isActive}}
 <form method="post" action="/apartments/{{ apartment.id }}/deactivations">
-<button>Deacivate listing</button>
+<button>Deactivate listing</button>
 </form>
 {{/apartment.isActive}}
 <h3>Number of People Who Like This Apartment: {{ list.size }}</h3>

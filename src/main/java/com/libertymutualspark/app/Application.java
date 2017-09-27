@@ -28,10 +28,12 @@ public class Application {
 			Apartment apartment = new Apartment(6000, 1, 0, 350, "123 Main St.", "San Francisco", "CA", "95125", true);
 			curtis.add(apartment);
 			apartment.saveIt();
-			apartment = new Apartment(1400, 5, 6, 4000, "123 Cowboy Way", "Houston", "TX", "77006", false);
+			apartment = new Apartment(1400, 5, 6, 4000, "123 Cowboy Way", "Houston", "TX", "77006", true);
 			curtis.add(apartment);
 			apartment.saveIt();
 		}
+		
+		enableCORS("http://localhost:4200", "*", "*");
 
 		path("/apartments", () -> {
 			before("/new", SecurityFilters.isAuthenticated);
@@ -59,7 +61,34 @@ public class Application {
 		path("/api", () -> {
 			get("/apartments/:id", ApartmentApiController.details);
 			post("/apartments", ApartmentApiController.create);
+			get("/apartments", ApartmentApiController.index);
 		});
+	}
+	
+	
+	private static void enableCORS(final String origin, final String methods, final String headers) {
+
+	    options("/*", (request, response) -> {
+
+	        String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
+	        if (accessControlRequestHeaders != null) {
+	            response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
+	        }
+
+	        String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
+	        if (accessControlRequestMethod != null) {
+	            response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+	        }
+
+	        return "OK";
+	    });
+
+	    before((request, response) -> {
+	        response.header("Access-Control-Allow-Origin", origin);
+	        response.header("Access-Control-Request-Method", methods);
+	        response.header("Access-Control-Allow-Headers", headers);
+	        response.header("Access-Control-Allow-Credentials", "true");
+	    });
 	}
 
 }
