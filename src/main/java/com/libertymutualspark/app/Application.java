@@ -7,6 +7,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import com.libertymutualspark.app.controllers.ApartmentApiController;
 import com.libertymutualspark.app.controllers.ApartmentController;
 import com.libertymutualspark.app.controllers.HomeController;
+import com.libertymutualspark.app.controllers.SessionApiController;
 import com.libertymutualspark.app.controllers.SessionController;
 import com.libertymutualspark.app.controllers.UserController;
 import com.libertymutualspark.app.filters.SecurityFilters;
@@ -31,10 +32,19 @@ public class Application {
 			apartment = new Apartment(1400, 5, 6, 4000, "123 Cowboy Way", "Houston", "TX", "77006", true);
 			curtis.add(apartment);
 			apartment.saveIt();
+			
+			User gerry = new User("gerry.bradley@libertymutual.com", encryptedPassword, "Gerry", "Bradley");
+			gerry.saveIt();
+			apartment = new Apartment(6000, 1, 0, 350, "456 East Main St.", "San Francisco", "CA", "95125", true);
+			gerry.add(apartment);
+			apartment.saveIt();
+			apartment = new Apartment(1400, 5, 6, 4000, "789  West Cowboy Way", "Houston", "TX", "77006", true);
+			gerry.add(apartment);
+			apartment.saveIt();
 		}
 		
 		enableCORS("http://localhost:4200", "*", "*");
-
+		
 		path("/apartments", () -> {
 			before("/new", SecurityFilters.isAuthenticated);
 			get("/new", ApartmentController.newForm);
@@ -59,9 +69,13 @@ public class Application {
 		post("/login", SessionController.create);
 
 		path("/api", () -> {
+			get("/apartments/mine", ApartmentApiController.myListings);
 			get("/apartments/:id", ApartmentApiController.details);
 			post("/apartments", ApartmentApiController.create);
 			get("/apartments", ApartmentApiController.index);
+			
+			post("/sessions", SessionApiController.create);
+			delete("/sessions/mine", SessionApiController.destroy);
 		});
 	}
 	
