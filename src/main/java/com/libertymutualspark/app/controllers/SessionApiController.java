@@ -15,12 +15,14 @@ import spark.Route;
 public class SessionApiController {
 
 	public static final Route create = (Request req, Response res) -> {
-			String json  = req.body();
-	Map credentials = JsonHelper.toMap(json);
-	String email = credentials.get("email").toString();
-	String password = credentials.get("password").toString();res.header("Content-Type","application/json");try(
-	AutoCloseableDb db = new AutoCloseableDb()) {
-	
+		String json  = req.body();
+		Map credentials = JsonHelper.toMap(json);
+		String email = credentials.get("email").toString();
+		String password = credentials.get("password").toString();
+		res.header("Content-Type","application/json");
+		
+		try(AutoCloseableDb db = new AutoCloseableDb()) {
+		
 		User user = User.first("email = ?", email);
 		if (user != null && BCrypt.checkpw(password, user.getPassword())) {
 			req.session().attribute("currentUser", user);

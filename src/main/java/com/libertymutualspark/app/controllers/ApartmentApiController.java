@@ -18,29 +18,24 @@ import spark.Route;
 public class ApartmentApiController {
 
 	public static final Route index = (Request req, Response res) -> {
-
 		try (AutoCloseableDb db = new AutoCloseableDb()) {
 			LazyList<Apartment> apartments = Apartment.where("is_active = ?", true);
 			res.header("Content-Type", "application/json");
 			return apartments.toJson(true);
 		}
 	};
-	
-	
+
 	public static final Route myListings = (Request req, Response res) -> {
-		String json  = req.body();
+		String json = req.body();
 		Map credentials = JsonHelper.toMap(json);
 		User currentUser = User.first("email = ?", credentials);
 		long id = (long) currentUser.getId();
 		try (AutoCloseableDb db = new AutoCloseableDb()) {
 			LazyList<Apartment> apartments = Apartment.where("user_id = ?", "currentUser");
-			res.header("Content-Type","application/json");
+			res.header("Content-Type", "application/json");
 			return apartments.toJson(true);
 		}
 	};
-
-		
-		
 
 	public static final Route details = (Request req, Response res) -> {
 		try (AutoCloseableDb db = new AutoCloseableDb()) {
@@ -48,8 +43,8 @@ public class ApartmentApiController {
 			int id = Integer.parseInt(idAsString);
 			Apartment apartment = Apartment.findById(id);
 			if (apartment != null) {
-				res.header("Content-Type", "application/json"); 
-				return apartment.toJson(true); 
+				res.header("Content-Type", "application/json");
+				return apartment.toJson(true);
 			}
 			notFound("Did not find that apartment.");
 			return "";
@@ -67,6 +62,46 @@ public class ApartmentApiController {
 			return apartment.toJson(true);
 		}
 
+	};
+
+	public static final Route activate = (Request req, Response res) -> {
+		System.out.println("activate route ran");
+		try (AutoCloseableDb db = new AutoCloseableDb()) {
+			String idAsString = req.params("id");
+			int id = Integer.parseInt(idAsString);
+			Apartment apartment = Apartment.findById(id);
+			apartment.set("is_active", true);
+			apartment.saveIt();
+			res.header("Content-Type", "application/json");
+			return apartment.toJson(true);
+
+		}
+
+	};
+
+	public static final Route deactivate = (Request req, Response res) -> {
+		try (AutoCloseableDb db = new AutoCloseableDb()) {
+			String idAsString = req.params("id");
+			int id = Integer.parseInt(idAsString);
+			Apartment apartment = Apartment.findById(id);
+			apartment.set("is_active", false);
+			apartment.saveIt();
+			res.header("Content-Type", "application/json");
+			return apartment.toJson(true);
+
+		}
+	};
+
+	public static final Route like = (Request req, Response res) -> {
+		try (AutoCloseableDb db = new AutoCloseableDb()) {
+			String idAsString = req.params("id");
+			int id = Integer.parseInt(idAsString);
+			Apartment apartment = Apartment.findById(id);
+			User currentUser = req.session().attribute("currentUser");
+			apartment.add(currentUser);
+			res.header("Content-Type", "application/json");
+			return apartment.toJson(true);
+		}
 	};
 
 }
